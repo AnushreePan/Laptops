@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Laptops/static/css/main.80820ae4.css",
+    "main.js": "/Laptops/static/js/main.7336a88e.js",
+    "index.html": "/Laptops/index.html",
+    "main.80820ae4.css.map": "/Laptops/static/css/main.80820ae4.css.map",
+    "main.7336a88e.js.map": "/Laptops/static/js/main.7336a88e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.80820ae4.css",
+    "static/js/main.7336a88e.js"
+  ]
+}
