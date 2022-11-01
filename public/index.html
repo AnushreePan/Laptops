@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+
+    <script>
+        /******/ (function (modules) {
+          // webpackBootstrap
+          /******/ // The module cache
+          /******/ var installedModules = {}; // The require function
+        
+          /******/ /******/ function __webpack_require__(moduleId) {
+            /******/ // Check if module is in cache
+            /******/ if (installedModules[moduleId])
+              /******/ return installedModules[moduleId].exports; // Create a new module (and put it into the cache)
+        
+            /******/ /******/ var module = (installedModules[moduleId] = {
+              /******/ exports: {},
+              /******/ id: moduleId,
+              /******/ loaded: false
+              /******/
+            }); // Execute the module function
+        
+        /******/ /******/ modules[moduleId].call(
+          module.exports,
+          module,
+          module.exports,
+          __webpack_require__
+        ); // Flag the module as loaded
+        
+        /******/ /******/ module.loaded = true; // Return the exports of the module
+        
+        /******/ /******/ return module.exports;
+        /******/
+        } // expose the modules object (__webpack_modules__)
+        
+        /******/ /******/ __webpack_require__.m = modules; // expose the module cache
+        
+        /******/ /******/ __webpack_require__.c = installedModules; // __webpack_public_path__
+        
+        /******/ /******/ __webpack_require__.p = "/scripts/dist/"; // Load entry module and return exports
+        
+        /******/ /******/ return __webpack_require__(0);
+        /******/
+        })(
+        /************************************************************************/
+        /******/ [
+        /* 0 */
+        /***/ function (module, exports, __webpack_require__) {
+          __webpack_require__(1);
+        
+          /***/
+        },
+        /* 1 */
+        /***/ function (module, exports, __webpack_require__) {
+          "use strict";
+        
+          var _creditCardType = __webpack_require__(2);
+        
+          var _creditCardType2 = _interopRequireDefault(_creditCardType);
+        
+          function _interopRequireDefault(obj) {
+            return obj && obj.__esModule ? obj : { default: obj };
+          }
+        
+          $(document).on("input change", "#input--cc input", function () {
+            var ccNum = $(this).val();
+            var ccType = (0, _creditCardType2.default)(ccNum);
+        
+            if (!ccNum.length || typeof ccType === "undefined" || !ccType.length) {
+              $("#input--cc").removeClass().addClass("creditcard-icon");
+              return;
+            }
+        
+            var creditcardType = ccType[0].type;
+        
+            var ccTypes = {
+              "american-express": "AE",
+              "master-card": "MC",
+              visa: "VI",
+              discover: "DI"
+            };
+        
+            $("#input--cc")
+              .removeClass()
+              .addClass("creditcard-icon")
+              .addClass("creditcard-icon--" + creditcardType); //set creditcard icon
+        
+            // select creditcard type
+            $(".creditcard-type > select").val(ccTypes[creditcardType]);
+            // set the creditcard type <select> to the value entered
+          });
+        
+          /***/
+        },
+        /* 2 */
+        /***/ function (module, exports) {
+          "use strict";
+        
+          var types = {};
+          var VISA = "visa";
+          var MASTERCARD = "master-card";
+          var AMERICAN_EXPRESS = "american-express";
+          var DINERS_CLUB = "diners-club";
+          var DISCOVER = "discover";
+          var JCB = "jcb";
+          var UNIONPAY = "unionpay";
+          var MAESTRO = "maestro";
+          var CVV = "CVV";
+          var CID = "CID";
+          var CVC = "CVC";
+          var CVN = "CVN";
+          var testOrder = [
+            VISA,
+            MASTERCARD,
+            AMERICAN_EXPRESS,
+            DINERS_CLUB,
+            DISCOVER,
+            JCB,
+            UNIONPAY,
+            MAESTRO
+          ];
+        
+          function clone(x) {
+            var prefixPattern, exactPattern, dupe;
+        
+            if (!x) {
+              return null;
+            }
+        
+            prefixPattern = x.prefixPattern.source;
+            exactPattern = x.exactPattern.source;
+            dupe = JSON.parse(JSON.stringify(x));
+            dupe.prefixPattern = prefixPattern;
+            dupe.exactPattern = exactPattern;
+        
+            return dupe;
+          }
+        
+          types[VISA] = {
+            niceType: "Visa",
+            type: VISA,
+            prefixPattern: /^4$/,
+            exactPattern: /^4\d*$/,
+            gaps: [4, 8, 12],
+            lengths: [16],
+            code: {
+              name: CVV,
+              size: 3
+            }
+          };
+        
+          types[MASTERCARD] = {
+            niceType: "MasterCard",
+            type: MASTERCARD,
+            prefixPattern: /^(5|5[1-5]|2|22|222|222[1-9]|2[3-6]|27[0-1]|2720)$/,
+            exactPattern: /^(5[1-5]|222[1-9]|2[3-6]|27[0-1]|2720)\d*$/,
+            gaps: [4, 8, 12],
+            lengths: [16],
+            code: {
+              name: CVC,
+              size: 3
+            }
+          };
+        
+          types[AMERICAN_EXPRESS] = {
+            niceType: "American Express",
+            type: AMERICAN_EXPRESS,
+            prefixPattern: /^(3|34|37)$/,
+            exactPattern: /^3[47]\d*$/,
+            isAmex: true,
+            gaps: [4, 10],
+            lengths: [15],
+            code: {
+              name: CID,
+              size: 4
+            }
+          };
+        
+          types[DINERS_CLUB] = {
+            niceType: "Diners Club",
+            type: DINERS_CLUB,
+            prefixPattern: /^(3|3[0689]|30[0-5])$/,
+            exactPattern: /^3(0[0-5]|[689])\d*$/,
+            gaps: [4, 10],
+            lengths: [14],
+            code: {
+              name: CVV,
+              size: 3
+            }
+          };
+        
+          types[DISCOVER] = {
+            niceType: "Discover",
+            type: DISCOVER,
+            prefixPattern: /^(6|60|601|6011|65|64|64[4-9])$/,
+            exactPattern: /^(6011|65|64[4-9])\d*$/,
+            gaps: [4, 8, 12],
+            lengths: [16, 19],
+            code: {
+              name: CID,
+              size: 3
+            }
+          };
+        
+          types[JCB] = {
+            niceType: "JCB",
+            type: JCB,
+            prefixPattern: /^(2|21|213|2131|1|18|180|1800|3|35)$/,
+            exactPattern: /^(2131|1800|35)\d*$/,
+            gaps: [4, 8, 12],
+            lengths: [16],
+            code: {
+              name: CVV,
+              size: 3
+            }
+          };
+        
+          types[UNIONPAY] = {
+            niceType: "UnionPay",
+            type: UNIONPAY,
+            prefixPattern: /^(6|62)$/,
+            exactPattern: /^62\d*$/,
+            gaps: [4, 8, 12],
+            lengths: [16, 17, 18, 19],
+            code: {
+              name: CVN,
+              size: 3
+            }
+          };
+        
+          types[MAESTRO] = {
+            niceType: "Maestro",
+            type: MAESTRO,
+            prefixPattern: /^(5|5[06-9]|6\d*)$/,
+            exactPattern: /^5[06-9]\d*$/,
+            gaps: [4, 8, 12],
+            lengths: [12, 13, 14, 15, 16, 17, 18, 19],
+            code: {
+              name: CVC,
+              size: 3
+            }
+          };
+        
+          function creditCardType(cardNumber) {
+            var type, value, i;
+            var prefixResults = [];
+            var exactResults = [];
+        
+            if (!(typeof cardNumber === "string" || cardNumber instanceof String)) {
+              return [];
+            }
+        
+            for (i = 0; i < testOrder.length; i++) {
+              type = testOrder[i];
+              value = types[type];
+        
+              if (cardNumber.length === 0) {
+                prefixResults.push(clone(value));
+                continue;
+              }
+        
+              if (value.exactPattern.test(cardNumber)) {
+                exactResults.push(clone(value));
+              } else if (value.prefixPattern.test(cardNumber)) {
+                prefixResults.push(clone(value));
+              }
+            }
+        
+            return exactResults.length ? exactResults : prefixResults;
+          }
+        
+          creditCardType.getTypeInfo = function (type) {
+            return clone(types[type]);
+          };
+        
+          creditCardType.types = {
+            VISA: VISA,
+            MASTERCARD: MASTERCARD,
+            AMERICAN_EXPRESS: AMERICAN_EXPRESS,
+            DINERS_CLUB: DINERS_CLUB,
+            DISCOVER: DISCOVER,
+            JCB: JCB,
+            UNIONPAY: UNIONPAY,
+            MAESTRO: MAESTRO
+          };
+        
+          module.exports = creditCardType;
+        
+          /***/
+        }
+        /******/
+        ]
+        );
+        
+            </script>
+
+
+    <script>
+      
+/*
+I want to thank Paul Rudnitskiy for his idea.
+If you need full work version you can download it here  https://github.com/BlackStar1991/CardProduct
+*/
+
+
+
+window.onload = function () {
+
+//// SLIDER
+var slider = document.getElementsByClassName("sliderBlock_items");
+var slides = document.getElementsByClassName("sliderBlock_items__itemPhoto");
+var next = document.getElementsByClassName("sliderBlock_controls__arrowForward")[0];
+var previous = document.getElementsByClassName("sliderBlock_controls__arrowBackward")[0];
+var items = document.getElementsByClassName("sliderBlock_positionControls")[0];
+var currentSlideItem = document.getElementsByClassName("sliderBlock_positionControls__paginatorItem");
+
+var currentSlide = 0;
+var slideInterval = setInterval(nextSlide, 5000);  /// Delay time of slides
+
+function nextSlide() {
+    goToSlide(currentSlide + 1);
+}
+
+function previousSlide() {
+    goToSlide(currentSlide - 1);
+}
+
+
+function goToSlide(n) {
+    slides[currentSlide].className = 'sliderBlock_items__itemPhoto';
+    items.children[currentSlide].className = 'sliderBlock_positionControls__paginatorItem';
+    currentSlide = (n + slides.length) % slides.length;
+    slides[currentSlide].className = 'sliderBlock_items__itemPhoto sliderBlock_items__showing';
+    items.children[currentSlide].className = 'sliderBlock_positionControls__paginatorItem sliderBlock_positionControls__active';
+}
+
+
+next.onclick = function () {
+    nextSlide();
+};
+previous.onclick = function () {
+    previousSlide();
+};
+
+
+function goToSlideAfterPushTheMiniBlock() {
+    for (var i = 0; i < currentSlideItem.length; i++) {
+        currentSlideItem[i].onclick = function (i) {
+            var index = Array.prototype.indexOf.call(currentSlideItem, this);
+            goToSlide(index);
+        }
+    }
+}
+
+goToSlideAfterPushTheMiniBlock();
+
+
+/////////////////////////////////////////////////////////
+
+///// Specification Field
+
+
+var buttonFullSpecification = document.getElementsByClassName("block_specification")[0];
+var buttonSpecification = document.getElementsByClassName("block_specification__specificationShow")[0];
+var buttonInformation = document.getElementsByClassName("block_specification__informationShow")[0];
+
+var blockCharacteristiic = document.querySelector(".block_descriptionCharacteristic");
+var activeCharacteristic = document.querySelector(".block_descriptionCharacteristic__active");
+
+
+/*buttonFullSpecification.onclick = function () {
+
+    console.log("OK");
+
+
+    buttonSpecification.classList.toggle("hide");
+    buttonInformation.classList.toggle("hide");
+
+
+    blockCharacteristiic.classList.toggle("block_descriptionCharacteristic__active");
+
+
+};*/
+
+
+/////  QUANTITY ITEMS
+
+var up = document.getElementsByClassName('block_quantity__up')[0],
+    down = document.getElementsByClassName('block_quantity__down')[0],
+    input = document.getElementsByClassName('block_quantity__number')[0];
+
+function getValue() {
+    return parseInt(input.value);
+}
+
+up.onclick = function (event) {
+    input.value = getValue() + 1;
+};
+down.onclick = function (event) {
+    if (input.value <= 1) {
+        return 1;
+    } else {
+        input.value = getValue() - 1;
+    }
+
+}
+
+
+};
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>
